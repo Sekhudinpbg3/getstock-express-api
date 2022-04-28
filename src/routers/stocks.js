@@ -9,6 +9,6 @@ const router = express.Router();
 router.get(`/index`, getAllIndex);
 router.get(`/sectors`,getSectors);
 router.get(`/search`,getWithParams );
-router.get(`/`, getAllStocks );
+router.get(`/getall`, getAllStocks );
 
 module.exports = router;
