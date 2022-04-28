@@ -19,11 +19,11 @@ exports.getSectors = async (req, res) => {
     const data = response.data.map((sector, idx) => ({
       id: sector.Id,
       name: sector.Name,
-      stocks_url: `http://localhost:4000/v1/stocks/search?sector_id=${sector.Id}`,
+      stocks_url: `https://getstock-info.herokuapp.com/v1/stocks/search?sector_id=${sector.Id}`,
       subsectors: subSectors[idx].map((subsector) => ({
         id: subsector.Id,
         name: subsector.Name,
-        stocks_url: `http://localhost:4000/v1/stocks/search?subsector_id=${subsector.Id}`,
+        stocks_url: `https://getstock-info.herokuapp.com/v1/stocks/search?subsector_id=${subsector.Id}`,
       })),
     }));
 
