@@ -20,10 +20,11 @@ const validate = async (params) => {
 const getData = async (params = {}) => {
   const parsedParams = await validate(params);
   try {
+    const res = await client.get("/StockSearchResult/GetAll")
     const response = await client.get("/StockSearchResult/GetAll", {
       params: parsedParams,
     });
-    return response.data;
+    return [Object.keys(res.data).length, response.data];
   } catch (error) {
     const message = error.response
       ? error.response.data.message
@@ -37,9 +38,10 @@ exports.getWithParams = async (req, res) => {
     const data = await getData(req.query);
     return res.json({
       message: "Data saham",
+      all_stocks: data[0],
       current_page: req.query.page ? req.query.page : 1,
-      per_page: Object.keys(data).length,
-      data: data,
+      per_page: Object.keys(data[1]).length,
+      data:data[1],
     });
   } catch (error) {
     const status = error.name === "ValidationError" ? 422 : 500;
